@@ -1,0 +1,21 @@
+{
+  "name": "MapJs",
+  "description": "none for while.",
+  "author": "Raphael Amorim <rapha850@gmail.com>",
+  "homepage": "https://github.com/raphamorim/MapJs",
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raphamorim/MapJs"
+  },
+  "contributors": [
+    {
+      "name": "Raphael Amorim",
+      "email": "rapha850@gmail.com"
+    },
+    {
+      "name": "Marco Agner",
+      "email": "marco.agner@live.com"
+    }
+  ]
+}
