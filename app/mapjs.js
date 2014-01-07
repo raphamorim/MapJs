@@ -44,9 +44,10 @@ function __startApp () {
 	   var src = helper.getAtt("src"); // por enquanto
 	   var set = helper.getAtt("set");
 
+
 	   switch (set) {
 
-		    case "here": map.getMap(width, height, zoom);
+		    case "actual": map.getMap(width, height, zoom);
 			    break;
 		    case "latitude": map.getLatitude();
 			    break;
@@ -98,18 +99,38 @@ function Helper() {
       return document.getElementsByTagName(element).length;
     }
 
+    this.html = function(element, value) {
+      document.querySelector(element).innerHTML = value;
+    }
+
 }
 
 function View() {
 
   this.returnError = function(msg) {
-      if (msg != null)
-        alert(msg);
 
-      alert("Fail with MapJs...");
-    }
+      src = view.getScreen();
+
+      if(src) {
+        helper.html(mapProperties.element, "<img src='" + src + "' />");
+        return false;
+      }
+
+      console.log('Error: Ocorred a problem with MapJs');
+
+      if(msg) {
+        console.log(msg);
+      }
+
+  }
+
+  this.getScreen = function(){
+      var src = "http://maps.googleapis.com/maps/api/staticmap?zoom=" + mapProperties.zoom + "&size=600x300&maptype=roadmap&markers=color:red%7Ccolor:red%7Clabel:C%7C" + mapProperties.latitude + "," + mapProperties.longitude + "&sensor=false";
+      return src;
+  }
 
 }
+
 
 //Draw Maps Function
 function draw(position){
@@ -155,17 +176,13 @@ function draw(position){
 //Set Latitude and Longitude in a Element
 function setLatitude(position){
       var latlng = position.coords.latitude;
-      var element = document.querySelector(mapProperties.element);
-      element.innerHTML = String(latlng);
+      helper.html(mapProperties.element, String(latlng));
 }
 
 function setLongitude(position){
       var latlng = position.coords.longitude;
-      var element = document.querySelector(mapProperties.element);
-      element.innerHTML = String(latlng);
+      helper.html(mapProperties.element, String(latlng));
 }
-
-
 
 
 //The Map Class
@@ -174,27 +191,18 @@ function Map(){
       //GET MAP
       this.getMap = function(mapWidth, mapHeight, zoom) {
 
-           if (navigator.geolocation) {
+          if(mapWidth)
+              mapProperties.sizeW = mapWidth;
 
-                if(mapWidth)
-                  mapProperties.sizeW = mapWidth;
+          if(mapHeight)
+              mapProperties.sizeH = mapHeight;
 
-                if(mapHeight)
-                  mapProperties.sizeH = mapHeight;
+          if(zoom)
+              mapProperties.zoom = zoom;
 
-                if(zoom)
-                  mapProperties.zoom = zoom;
+          helper.html(mapProperties.element, "<section><article><p><span id='status'>Please wait...</span></p></article></section></div>");
 
-
-                var element = document.querySelector(mapProperties.element);
-                element.innerHTML = "<section><article><p><span id='status'>Please wait...</span></p></article></section></div>";
-
-                navigator.geolocation.getCurrentPosition(draw, view.returnError);
-
-            }
-            else {
-                view.returnError('Your browser does not support Geolocation!');
-            }
+          navigator.geolocation.getCurrentPosition(draw, view.returnError);
 
       }
 
@@ -210,33 +218,24 @@ function Map(){
 
 
       //CREATE MAP USING PARAMETERS
-      this.setMap = function(lat, lon, mapWidth, mapHeight, zoom){
-          if (navigator.geolocation) {
+      this.setMap = function(lat, lon, mapWidth, mapHeight, zoom) {
 
-                console.log(mapHeight);
+          if(mapWidth)
+              mapProperties.sizeW = mapWidth;
 
-                if(mapWidth)
-                  mapProperties.sizeW = mapWidth;
+          if(mapHeight)
+              mapProperties.sizeH = mapHeight;
 
-                if(mapHeight)
-                  mapProperties.sizeH = mapHeight;
-
-                if(zoom)
-                  mapProperties.zoom = zoom;
+          if(zoom)
+              mapProperties.zoom = zoom;
 
 
-                mapProperties.latitude = lat;
-                mapProperties.longitude = lon;
+          mapProperties.latitude = lat;
+          mapProperties.longitude = lon;
 
-                var element = document.querySelector(mapProperties.element);
-                element.innerHTML = "<section><article><p><span id='status'>Please wait...</span></p></article></section></div>";
+          helper.html(mapProperties.element, "<section><article><p><span id='status'>Please wait...</span></p></article></section></div>");
 
-                navigator.geolocation.getCurrentPosition(draw, view.returnError);
-
-          }
-          else{
-              view.returnError('Your browser does not support Geolocation!');
-          }
+          navigator.geolocation.getCurrentPosition(draw, view.returnError);
 
       }
 
