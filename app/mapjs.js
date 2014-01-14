@@ -10,21 +10,21 @@ GitHub Project -> http://github.com/raphamorim/mapjs
 //Map = trata das respostas dos devidos sources e responde a View
 //Helper = camada que serve para aglomerar simples funções, dando uma enxutada no código
 //View = responsável por setar os dados ou mapa na tela, ela precisa do Helper e Map alinhados
-//PS: __startApp é o "main" do APP será rodado apenas quando a tela for carregada.
 
 var map = new Map();
 var helper = new Helper();
 var view = new View();
 
 
-//Objeto default, pode ser alterado pelo próprio desenvolvedor
+//Default object, you can change if wanna...
 var mapProperties = {
 		  element: "mapjs",
       sizeW: "500px",
       sizeH: "200px",
       latitude: null,
       longitude: null,
-      zoom: 15
+      zoom: 15,
+      typeId: null
     };
 
 window.onload = __startApp;
@@ -40,14 +40,14 @@ function __startApp () {
 	   var latitude = helper.getAtt("latitude");
 	   var longitude = helper.getAtt("longitude");
 	   var zoom = parseInt(helper.getAtt("zoom"));
-     var type = helper.getAtt("type"); // por enquanto
+     mapProperties.typeId = helper.getAtt("type"); // por enquanto
 	   var src = helper.getAtt("src"); // por enquanto
 	   var set = helper.getAtt("set");
 
 
 	   switch (set) {
 
-		    case "actual": map.getMap(width, height, zoom);
+		    case "here": map.getMap(width, height, zoom);
 			    break;
 		    case "latitude": map.getLatitude();
 			    break;
@@ -161,9 +161,21 @@ function draw(position){
         zoom: mapProperties.zoom,
         center: latlng,
         mapTypeControl: false,
-        navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL}
     };
+
+    switch(mapProperties.typeId) {
+        case "roadmap": myOptions.mapTypeId = google.maps.MapTypeId.ROADMAP
+          break;
+        case "satellite": myOptions.mapTypeId = google.maps.MapTypeId.SATELLITE
+          break;
+        case "hybrid": myOptions.mapTypeId = google.maps.MapTypeId.HYBRID
+          break;
+        case "terrain": myOptions.mapTypeId = google.maps.MapTypeId.TERRAIN
+          break;
+        default: myOptions.mapTypeId= google.maps.MapTypeId.ROADMAP
+          break;
+        }
 
     var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
     var marker = new google.maps.Marker({
