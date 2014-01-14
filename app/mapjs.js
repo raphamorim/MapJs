@@ -6,15 +6,9 @@ GitHub Project -> http://github.com/raphamorim/mapjs
 
 */
 
-//A principio foi optado uma arquitetura simples, que é dissolvida em 3 camadas:
-//Map = trata das respostas dos devidos sources e responde a View
-//Helper = camada que serve para aglomerar simples funções, dando uma enxutada no código
-//View = responsável por setar os dados ou mapa na tela, ela precisa do Helper e Map alinhados
-
 var map = new Map();
 var helper = new Helper();
 var view = new View();
-
 
 //Default object, you can change if wanna...
 var mapProperties = {
@@ -32,6 +26,8 @@ window.onload = __startApp;
 function __startApp () {
 
   var qnt = helper.getQuantum(mapProperties.element);
+
+  console.log(qnt);
 
   for (i = 0; i <= qnt; i++) {
 
@@ -57,8 +53,8 @@ function __startApp () {
 
 		    default: map.getMap(width, height, zoom);
 			    break;
-	   }
 
+	   }
   }
 }
 
@@ -103,6 +99,10 @@ function Helper() {
       document.querySelector(element).innerHTML = value;
     }
 
+    this.getSize = function(value) {
+      return value.replace("px", "");
+    }
+
 }
 
 function View() {
@@ -125,7 +125,7 @@ function View() {
   }
 
   this.getScreen = function(){
-      var src = "http://maps.googleapis.com/maps/api/staticmap?zoom=" + mapProperties.zoom + "&size=600x300&maptype=roadmap&markers=color:red%7Ccolor:red%7Clabel:C%7C" + mapProperties.latitude + "," + mapProperties.longitude + "&sensor=false";
+      var src = "http://maps.googleapis.com/maps/api/staticmap?z=" + mapProperties.zoom + "&size=" + helper.getSize(mapProperties.sizeW) + "x" + helper.getSize(mapProperties.sizeH) + "&t=m&markers=color:red%7Ccolor:red%7Clabel:C%7C" + mapProperties.latitude + "," + mapProperties.longitude + "&sensor=false";
       return src;
   }
 
