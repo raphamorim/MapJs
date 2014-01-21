@@ -41,7 +41,7 @@ function __getElements () {
 
   clearInterval(__creating);
 
-  __creating = window.setInterval(__startApp, 10);
+  __creating = window.setInterval(__startApp, 1000);
 
 }
 
