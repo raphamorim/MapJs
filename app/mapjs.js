@@ -6,13 +6,15 @@ GitHub Project -> http://github.com/raphamorim/mapjs
 
 */
 
-var map = new Map();
-var helper = new Helper();
-var view = new View();
+var map = new Map(),
+    helper = new Helper(),
+    view = new View(),
+    pointer = null;
 
 //Default object, you can change if wanna...
 var mapProperties = {
-		  element: "mapjs",
+		  tag: "mapjs",
+      list: [],
       sizeW: "500px",
       sizeH: "200px",
       latitude: null,
@@ -21,43 +23,79 @@ var mapProperties = {
       typeId: null
     };
 
-window.onload = __startApp;
-
-function __startApp () {
-
-  var qnt = helper.getQuantum(mapProperties.element);
-
-  console.log(qnt);
-
-  for (i = 0; i <= qnt; i++) {
-
-	   var height = helper.getAtt("height");
-	   var width = helper.getAtt("width");
-	   var latitude = helper.getAtt("latitude");
-	   var longitude = helper.getAtt("longitude");
-	   var zoom = parseInt(helper.getAtt("zoom"));
-     mapProperties.typeId = helper.getAtt("type"); // por enquanto
-	   var src = helper.getAtt("src"); // por enquanto
-	   var set = helper.getAtt("set");
+window.onload = __getElements;
+var __creating = window.setInterval(__getElements, 1000);
 
 
-	   switch (set) {
+function __getElements () {
 
-		    case "here": map.getMap(width, height, zoom);
-			    break;
-		    case "latitude": map.getLatitude();
-			    break;
-		    case "longitude": map.getLongitude();
-			    break;
-        case "map": map.setMap(latitude, longitude, width, height, zoom);
+  var indice = helper.getQuantum(mapProperties.tag);
+  var elemento = document.querySelectorAll(mapProperties.tag);
 
-		    default: map.getMap(width, height, zoom);
-			    break;
+  console.log(indice);
 
-	   }
+  for(i = 0; i < indice; i++) {
+      elemento[i].setAttribute("id", "map" + i);
+      mapProperties.list.push("map" + i);
   }
+
+  clearInterval(__creating);
+
+  __creating = window.setInterval(__startApp, 10);
+
 }
 
+
+function __startApp () {
+    var list = mapProperties.list;
+
+
+    for (i = 0; i < list.length; i++) {
+
+      if (pointer != null) {
+
+      } else {
+
+          el = '#' + list[i];
+
+          var height = helper.getAtt(el ,"height");
+          var width = helper.getAtt(el, "width");
+          var latitude = helper.getAtt(el ,"latitude");
+          var longitude = helper.getAtt(el ,"longitude");
+          var zoom = parseInt(helper.getAtt(el ,"zoom"));
+          var type = helper.getAtt(el ,"type");
+          var set = helper.getAtt(el, "set");
+
+          mapProperties.typeId = type;
+
+          switch (set) {
+
+              case "here": map.getMap(el, width, height, zoom);
+                  break;
+              case "latitude": map.getLatitude();
+                  break;
+              case "longitude": map.getLongitude();
+                  break;
+              case "map": map.setMap(el, latitude, longitude, width, height, zoom);
+                  break;
+
+              default: map.getMap(width, height, zoom);
+                  break;
+          }
+
+          if ( pointer != null )
+            list.splice(i, 1);
+
+      }
+
+          console.log(list);
+    }
+
+    console.log(pointer);
+
+    if (pointer === null)
+      clearInterval(__creating);
+}
 
 //Code to get Maps from Google
 window.google = window.google || {};
@@ -84,11 +122,10 @@ window.google = window.google || {};
 })();
 
 
-
 function Helper() {
 
-    this.getAtt = function(value) {
-      return document.querySelector(mapProperties.element).getAttribute(value);
+    this.getAtt = function(selector, value) {
+      return document.querySelector(selector).getAttribute(value);
     }
 
     this.getQuantum = function(element) {
@@ -111,14 +148,14 @@ function View() {
 
       src = view.getScreen();
 
-      if(src) {
+      if (src) {
         helper.html(mapProperties.element, "<img src='" + src + "' />");
         return false;
       }
 
       console.log('Error: Ocorred a problem with MapJs');
 
-      if(msg) {
+      if (msg) {
         console.log(msg);
       }
 
@@ -134,7 +171,10 @@ function View() {
 
 //Draw Maps Function
 function draw(position){
-    var s = document.querySelector('#status');
+
+    var s = document.querySelector('#' + pointer);
+
+    console.log(pointer);
 
     if (s.className == 'success') {
         return;
@@ -144,16 +184,18 @@ function draw(position){
 
     s.className = 'success';
 
+    var itemName = 'mapcanvas' + pointer;
+
     var mapcanvas = document.createElement('div');
-        mapcanvas.id = 'mapcanvas';
+        mapcanvas.id = itemName;
         mapcanvas.style.height =  mapProperties.sizeH;
         mapcanvas.style.width =  mapProperties.sizeW;
 
     document.querySelector('article').appendChild(mapcanvas);
 
-    if((mapProperties.latitude == null)&&(mapProperties.longitude == null)) {
+    if ((mapProperties.latitude == null)&&(mapProperties.longitude == null)) {
       var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    }else{
+    } else {
       var latlng = new google.maps.LatLng(mapProperties.latitude, mapProperties.longitude);
     }
 
@@ -164,7 +206,7 @@ function draw(position){
         navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL}
     };
 
-    switch(mapProperties.typeId) {
+    switch (mapProperties.typeId) {
         case "roadmap": myOptions.mapTypeId = google.maps.MapTypeId.ROADMAP
           break;
         case "satellite": myOptions.mapTypeId = google.maps.MapTypeId.SATELLITE
@@ -173,16 +215,22 @@ function draw(position){
           break;
         case "terrain": myOptions.mapTypeId = google.maps.MapTypeId.TERRAIN
           break;
-        default: myOptions.mapTypeId= google.maps.MapTypeId.ROADMAP
+        default: myOptions.mapTypeId = google.maps.MapTypeId.ROADMAP
           break;
         }
 
-    var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
+    var map = new google.maps.Map(document.getElementById(itemName), myOptions);
     var marker = new google.maps.Marker({
         position: latlng,
         map: map,
         title:"You are here!"
     });
+
+    mapProperties.latitude = null;
+    mapProperties.longitude = null;
+    mapProperties.zoom = 15;
+    pointer = null;
+
 }
 
 //Set Latitude and Longitude in a Element
@@ -201,18 +249,26 @@ function setLongitude(position){
 function Map(){
 
       //GET MAP
-      this.getMap = function(mapWidth, mapHeight, zoom) {
+      this.getMap = function(element, mapWidth, mapHeight, zoom) {
 
-          if(mapWidth)
+          if (mapWidth)
               mapProperties.sizeW = mapWidth;
 
-          if(mapHeight)
+          if (mapHeight)
               mapProperties.sizeH = mapHeight;
 
-          if(zoom)
+          if (zoom)
               mapProperties.zoom = zoom;
 
-          helper.html(mapProperties.element, "<section><article><p><span id='status'>Please wait...</span></p></article></section></div>");
+
+          helper.html(element, '<section><article><span id="' + element.replace("#", "S") +
+                      '">Please wait...</span></article></section></div>');
+
+
+          if (pointer != null)
+              return false;
+
+          pointer = element.replace("#", "S");
 
           navigator.geolocation.getCurrentPosition(draw, view.returnError);
 
@@ -230,7 +286,7 @@ function Map(){
 
 
       //CREATE MAP USING PARAMETERS
-      this.setMap = function(lat, lon, mapWidth, mapHeight, zoom) {
+      this.setMap = function(element, lat, lon, mapWidth, mapHeight, zoom) {
 
           if(mapWidth)
               mapProperties.sizeW = mapWidth;
@@ -241,11 +297,17 @@ function Map(){
           if(zoom)
               mapProperties.zoom = zoom;
 
-
           mapProperties.latitude = lat;
           mapProperties.longitude = lon;
 
-          helper.html(mapProperties.element, "<section><article><p><span id='status'>Please wait...</span></p></article></section></div>");
+
+          helper.html(element, '<section><article><span id="' + element.replace("#", "S") +
+                      '">Please wait...</span></article></section></div>');
+
+          if (pointer != null)
+              return false;
+
+          pointer = element.replace("#", "S");
 
           navigator.geolocation.getCurrentPosition(draw, view.returnError);
 
