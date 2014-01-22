@@ -32,8 +32,6 @@ function __getElements () {
   var indice = helper.getQuantum(mapProperties.tag);
   var elemento = document.querySelectorAll(mapProperties.tag);
 
-  console.log(indice);
-
   for(i = 0; i < indice; i++) {
       elemento[i].setAttribute("id", "map" + i);
       mapProperties.list.push("map" + i);
@@ -41,7 +39,7 @@ function __getElements () {
 
   clearInterval(__creating);
 
-  __creating = window.setInterval(__startApp, 10);
+  __creating = window.setInterval(__startApp, 1000);
 
 }
 
@@ -72,9 +70,9 @@ function __startApp () {
 
               case "here": map.getMap(el, width, height, zoom);
                   break;
-              case "latitude": map.getLatitude();
+              case "latitude": map.getLatitude(el);
                   break;
-              case "longitude": map.getLongitude();
+              case "longitude": map.getLongitude(el);
                   break;
               case "map": map.setMap(el, latitude, longitude, width, height, zoom);
                   break;
@@ -88,10 +86,10 @@ function __startApp () {
 
       }
 
-          console.log(list);
+          // console.log(list);
     }
 
-    console.log(pointer);
+    // console.log(pointer);
 
     if (pointer === null)
       clearInterval(__creating);
@@ -174,8 +172,6 @@ function draw(position){
 
     var s = document.querySelector('#' + pointer);
 
-    console.log(pointer);
-
     if (s.className == 'success') {
         return;
     }
@@ -236,12 +232,14 @@ function draw(position){
 //Set Latitude and Longitude in a Element
 function setLatitude(position){
       var latlng = position.coords.latitude;
-      helper.html(mapProperties.element, String(latlng));
+      helper.html(pointer, String(latlng));
+      pointer = null;
 }
 
 function setLongitude(position){
       var latlng = position.coords.longitude;
-      helper.html(mapProperties.element, String(latlng));
+      helper.html(pointer, String(latlng));
+      pointer = null;
 }
 
 
@@ -275,12 +273,22 @@ function Map(){
       }
 
 
-      this.getLatitude = function() {
+      this.getLatitude = function(element) {
+          if (pointer != null)
+              return false;
+
+          pointer = element;
+
           navigator.geolocation.getCurrentPosition(setLatitude, view.returnError);
       }
 
 
-      this.getLongitude = function() {
+      this.getLongitude = function(element) {
+          if (pointer != null)
+              return false;
+
+          pointer = element;
+
           navigator.geolocation.getCurrentPosition(setLongitude, view.returnError);
       }
 
