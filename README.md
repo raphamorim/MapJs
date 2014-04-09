@@ -1,5 +1,5 @@
 ##MapJs
-The MapJs is a JavaScript feature to create maps or use Geolocation API using only HTML. To use is simple, just add the project source and done (not need anything, nether less Jquery).
+The MapJs is a JavaScript project to create maps or use Geolocation API using only HTML. To use is simple, just add the project source and done! (not need anything, neither less Jquery).
 
 [See how it works](http://raphamorim.com/MapJs/)
 
