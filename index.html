@@ -5,15 +5,23 @@
 	<title>MapJs</title>
 </head>
 <body>
+	<h2>MapJS</h2>
 
-	<mapjs set="latitude" type="terrain" width='400px' zoom="18"></mapjs>
+	<!-- Return actual latitude -->
+	<p>My current Latitude is: <mapjs set="latitude"/></p>
 
-	<mapjs set="longitude" type="terrain" width='400px' zoom="18"></mapjs>
+	<!-- Return actual longitude -->
+	<p>My current Longitude is: <mapjs set="longitude"/></p>
 
-	<mapjs set="map" type="roadmap" latitude="51.54632532927234" longitude="-0.2224481445311799" width='800px'></mapjs>
+	<!-- Return the map from user current location -->
+	<p><strong>My current map: </strong><mapjs set="map" width='500px'/></p>
 
-	<mapjs set="here" width='300px'></mapjs>
 
-	<script type="text/javascript" src='app/mapjs.js'></script>
+	<!-- Return the map from location -->
+	<p><strong>Another example, setting latitude and longitude</strong>
+	<mapjs set="map" latitude="51.54632532927234" longitude="-0.2224481445311799" width='800px'/>
+	</p>
+
+	<script type="text/javascript" src='app/mapjs.min.js'></script>
 </body>
 </html>
