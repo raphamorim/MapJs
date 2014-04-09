@@ -1,17 +1,19 @@
-#MapJS
+##MapJs
+The MapJs is a JavaScript feature to create maps or use Geolocation API using only HTML. To use is simple, just add the project source and done (not need anything, nether less Jquery).
 
-###Setup:
+[See how it works](http://raphamorim.com/MapJs/)
 
-Get to the root directory of the project, start a localhost server and open local host using the right port.
+###How can I contribute to project?
 
-####Example in Python:
-```python
-python -m SimpleHTTPServer
-```
-... and the project will be running on http://localhost:8000
+Feel free to create any feature, but following this steps:
 
-####Example in PHP:
-```php
-php -S localhost:8000
-```
-... and the project will be running on http://localhost:8000
+1. Fork this project
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Add and commit your changes
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request :)
+
+###About
+**License:** MIT
+
+**Actual Version:** 0.1vr
