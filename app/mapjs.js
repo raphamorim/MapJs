@@ -1,9 +1,7 @@
 /*
-
 MapJs was developed by Raphael Amorim
 
 GitHub Project -> http://github.com/raphamorim/mapjs
-
 */
 
 var map = new Map(),
@@ -28,7 +26,6 @@ window.onload = __getElements();
 var __creating = window.setInterval(__getElements, 1000);
 
 function __getElements() {
-
   var indice = helper.getQuantum(mapProperties.tag);
   var elemento = document.querySelectorAll(mapProperties.tag);
 
@@ -39,25 +36,7 @@ function __getElements() {
 
   clearInterval(__creating);
 
-  __addCss();
-
   __creating = window.setInterval(__startApp, 1000);
-
-}
-
-function __addCss() {
-  var newElement = document.createElement('div');
-  newElement.id = "mapcss";
-  document.querySelector('body').appendChild(newElement);
-
-  var css = [];
-
-  css += "<style>.mapjs-loader{ position:relative; width: 6px; height: 6px; -webkit-animation: line 1s linear infinite alternate; -moz-animation: line 1s linear infinite alternate; animation: line 1s linear infinite alternate;}";
-  css += "@-webkit-keyframes line{ 0%{ background-color: rgba(0,0,0, 1); box-shadow: 12px 0px 0px 0px rgba(0,0,0,0.2), 24px 0px 0px 0px rgba(0,0,0,0.2);} 25%{ background-color: rgba(0,0,0, 0.4); box-shadow: 12px 0px 0px 0px rgba(0,0,0,2), 24px 0px 0px 0px rgba(0,0,0,0.2);} 75%{background-color: rgba(0,0,0, 0.4); box-shadow: 12px 0px 0px 0px rgba(0,0,0,0.2), 24px 0px 0px 0px rgba(0,0,0,2);}}";
-  css += "@-moz-keyframes line{ 0%{ background-color: rgba(0,0,0, 1); box-shadow: 12px 0px 0px 0px rgba(0,0,0,0.2), 24px 0px 0px 0px rgba(0,0,0,0.2); } 25%{ background-color: rgba(0,0,0, 0.4); box-shadow: 12px 0px 0px 0px rgba(0,0,0,2), 24px 0px 0px 0px rgba(0,0,0,0.2);} 75%{background-color: rgba(0,0,0, 0.4);box-shadow: 12px 0px 0px 0px rgba(0,0,0,0.2), 24px 0px 0px 0px rgba(0,0,0,2);}}";
-  css += "@keyframes line{0%{background-color: rgba(0,0,0, 1);box-shadow: 12px 0px 0px 0px rgba(0,0,0,0.2),24px 0px 0px 0px rgba(0,0,0,0.2);}25%{background-color: rgba(0,0,0, 0.4);box-shadow: 12px 0px 0px 0px rgba(0,0,0,2),24px 0px 0px 0px rgba(0,0,0,0.2);}75%{ background-color: rgba(0,0,0, 0.4);box-shadow: 12px 0px 0px 0px rgba(0,0,0,0.2),24px 0px 0px 0px rgba(0,0,0,2);}}</style>";
-
-  helper.html("#mapcss", css);
 }
 
 function __startApp() {
@@ -94,13 +73,11 @@ function __startApp() {
                   break;
           }
 
-          if ( pointer != null )
-            list.splice(i, 1);
+          if ( pointer != null ) list.splice(i, 1);
       }
     }
 
-    if (pointer === null)
-      clearInterval(__creating);
+    if (pointer === null) clearInterval(__creating);
 }
 
 
@@ -141,7 +118,6 @@ function Helper() {
     }
 }
 
-
 function View() {
 
   this.returnError = function(msg) {
@@ -152,11 +128,7 @@ function View() {
         return false;
       }
 
-      console.log('Error: Ocorred a problem with MapJs');
-
-      if (msg) {
-        console.log(msg);
-      }
+      if (msg) console.log(msg);
   }
 
   this.getScreen = function(){
@@ -165,15 +137,11 @@ function View() {
   }
 }
 
-
 //Draw Maps Function
 function draw(position){
-
     var s = document.querySelector('#' + pointer);
 
-    if (s.className == 'success') {
-        return;
-    }
+    if (s.className == 'success') return;
 
     s.innerHTML = null;
 
@@ -186,7 +154,7 @@ function draw(position){
         mapcanvas.style.height =  mapProperties.sizeH;
         mapcanvas.style.width =  mapProperties.sizeW;
 
-    document.querySelector('article').appendChild(mapcanvas);
+    document.querySelector('#' + pointer).appendChild(mapcanvas);
 
     if ((mapProperties.latitude == null)&&(mapProperties.longitude == null)) {
       var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -262,7 +230,7 @@ function Map(){
           }
 
           helper.html(element, '<section><article><span id="' + element.replace("#", "S") +
-                      '"><div class="mapjs-loader"></div></span></article></section></div>');
+                      '"></span></article></section></div>');
 
           if (pointer != null)
               return false;
