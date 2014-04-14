@@ -53,7 +53,7 @@ body {
   height: 240px;
   opacity: .5;
   overflow: hidden;
-  background: url(http://www.digitaltrends.com/wp-content/uploads/2013/05/google_map_customized_1.jpg) 50% 40px repeat;
+  background: url('../images/map-bg.jpg') 50% 40px repeat;
   z-index: 1;
   box-shadow: 0 0 10px #000;
   -webkit-animation: bgscroll 30s alternate infinite linear;
