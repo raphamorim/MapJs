@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Mapjs by raphamorim</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <title>Mapjs - A new way to work with maps</title>
+    <link rel="stylesheet" href="stylesheets/normalize.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="javascripts/main.js"></script>
     <!--[if lt IE 9]>
@@ -16,40 +16,56 @@
   </head>
   <body>
 
-      <header>
-        <h1>Mapjs</h1>
-        <p>A simple way to work with Maps.</p>
-      </header>
+      <div class="slide"></div>
+      <div class="first"></div>
+      <div class="second"></div>
+      <div class="third"></div>
 
-      <div id="banner">
-        <span id="logo"></span>
-
-        <a href="https://github.com/raphamorim/MapJs" class="button fork"><strong>View On GitHub</strong></a>
-        <div class="downloads">
-          <span>Downloads:</span>
-          <ul>
-            <li><a href="https://github.com/raphamorim/MapJs/zipball/master" class="button">ZIP</a></li>
-            <li><a href="https://github.com/raphamorim/MapJs/tarball/master" class="button">TAR</a></li>
-          </ul>
-        </div>
-      </div><!-- end banner -->
+      <div class="header">
+        <div id="logo"><span></span></div>
+        <h1>MapJs</h1>
+        <h2>A simple way to work with Maps.</h2>
+      </div>
 
     <div class="wrapper">
       <nav>
         <ul></ul>
       </nav>
       <section>
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Página em construção.</h3>
-
-
+        <h3>What's is MapJs?</h3>
+        <img src="https://cdn2.iconfinder.com/data/icons/snipicons/500/map-marker-256.png" class="mark-img" alt="" align="right" />
+        <p>The MapJs is a JavaScript project to create maps or use Geolocation API using only HTML. To use is simple, just add the project source and done! (not need anything, neither less Jquery).</p>
+        <p>This plugin is in beta phase, what does this mean it? MapJs is recomendable use for test only. Not production.</p>
+        <p>Some features will be added soon. For while mapJs is unstable.</p>
       </section>
-      <footer>
-        <p>Project maintained by <a href="https://github.com/raphamorim">raphamorim</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
-      </footer>
-    </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
 
+      <section class="ot">
+        <h3>How use?</h3>
+        <p>It's very simple use MapJs, follow this steps and be happy:</p>
+        <p>1 • Add the source on tag body end</p>
+        <p>
+          <div class="code">
+              &lt;<span class="tag">script</span> <span class="attr">src</span>=<span class="property">"mapjs.min.js"</span>&gt;&lt;/<span class="tag">script</span>&gt;<br>
+              &lt;/<span class="tag">body</span>&gt;
+          </div>
+        </p>
+        <p>2 • Just add mapJs tag in anywhere</p>
+        <p>
+          <div class="code">
+              &lt;<span class="tag">mapjs</span> <span class="attr">width</span>=<span class="property">"800px"</span> <span class="attr">height</span>=<span class="property">"300px"</span>/&gt;
+          </div>
+        </p>
+      </section>
+
+      <section class="ot">
+        <br><h3>Atributes</h3>
+        <p>• Width (default: 500px) = Element width</p>
+        <p>• Height (default: 300px) = Element height</p>
+        <p>• Latitude = Latitude map</p>
+        <p>• Longitude = Longitude map</p>
+        <p>• Type (default: Satellite) = Map type</p>
+        <p>• Zoom (default: 15) = Map zoom</p>
+      </section>
+    </div>
   </body>
 </html>
