@@ -30,7 +30,6 @@ dl:after {
   height: 0;
   overflow: hidden;
 }
-hr {display: none;}
 p {line-height: 1.5em;}
 
 body {
@@ -106,7 +105,7 @@ h3 {
 
 .first { position: absolute; z-index:0; top:240px; height: 420px; left:0; width: 100%; background: #333; }
 .second { position: absolute; z-index:0; top:660px; height: 540px; left:0; width: 100%; background: #ffc04d; }
-.third { position: absolute; z-index:0; top:1200px; height: 520px; left:0; width: 100%; background: #F8F8F8; }
+.third { position: absolute; z-index:0; top:1200px; height: 1520px; left:0; width: 100%; background: #F8F8F8; }
 .ot {margin-top: 130px; color: #333;}
 .mark-img {
   position: relative;
@@ -123,27 +122,18 @@ h3 {
   font-family: helvetica;
   font-size: 15px;
 }
+.tag { color: #F92672; }
+.attr { color: lightgreen; }
+.el { color: #a6e22e; }
+.var { color: lightblue; }
+.property { color: #e6db74; }
 
-.tag {
-  color: #F92672;
+hr {
+  margin-top: 15px;
+  margin-bottom: 80px;
+  border: 4px dotted #333;
 }
-
-.attr {
-  color: lightgreen;
-}
-
-.el {
-  color: #a6e22e;
-}
-
-.var {
-  color: lightblue;
-}
-
-.property {
-  color: #e6db74;
-}
-
+.poss { color: #3366FF; }
 
 @-webkit-keyframes bgscroll {
 	0%		{ background-position: 5% 40px; }
