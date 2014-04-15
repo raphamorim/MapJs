@@ -107,10 +107,24 @@ h3 {
 .second { position: absolute; z-index:0; top:660px; height: 540px; left:0; width: 100%; background: #ffc04d; }
 .third { position: absolute; z-index:0; top:1200px; height: 1520px; left:0; width: 100%; background: #F8F8F8; }
 .ot {margin-top: 130px; color: #333;}
+.snd {margin-bottom: 50px; text-align: center; color: #FFF;}
 .mark-img {
   position: relative;
   margin-top: -40px;
 }
+
+.btn-down {
+  position: relative;
+  padding: 20px 40px;
+  background: #65982e;
+  color: #FFF;
+  font-weight: 600;
+  border-radius: 3px;
+  transition: all 400ms ease;
+  letter-spacing: .03em;
+  box-shadow: 0 0 20px black;
+}
+.btn-down:hover { background: #72ac34; color: #FFF;}
 
 /* Syntax */
 .code {
