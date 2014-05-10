@@ -14,6 +14,6 @@ Feel free to create any feature, but following this steps:
 5. Submit a pull request :)
 
 ###About
-**License:** MIT
+**License:** MIT ® [Raphael Amorim](https://github.com/raphamorim)
 
 **Actual Version:** 0.1vr
