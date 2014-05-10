@@ -7,7 +7,8 @@ GitHub Project -> http://github.com/raphamorim/mapjs
 var map = new Map(),
     helper = new Helper(),
     view = new View(),
-    pointer = null;
+    pointer = null,
+    __process = null;
 
 //Default object, you can change if wanna...
 var mapProperties = {
@@ -23,8 +24,6 @@ var mapProperties = {
 
 window.onload = __getElements();
 
-var __creating = window.setInterval(__getElements, 1000);
-
 function __getElements() {
   var indice = helper.getQuantum(mapProperties.tag);
   var elemento = document.querySelectorAll(mapProperties.tag);
@@ -34,9 +33,7 @@ function __getElements() {
       mapProperties.list.push("map" + i);
   }
 
-  clearInterval(__creating);
-
-  __creating = window.setInterval(__startApp, 1000);
+  __process = window.setInterval(__startApp, 500);
 }
 
 function __startApp() {
@@ -77,7 +74,7 @@ function __startApp() {
       }
     }
 
-    if (pointer === null) clearInterval(__creating);
+    if (pointer === null) clearInterval(__process);
 }
 
 
