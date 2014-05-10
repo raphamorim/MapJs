@@ -129,8 +129,7 @@ function View() {
   }
 
   this.getScreen = function(){
-      var src = "http://maps.googleapis.com/maps/api/staticmap?z=" + mapProperties.zoom + "&size=" + helper.getSize(mapProperties.sizeW) + "x" + helper.getSize(mapProperties.sizeH) + "&t=m&markers=color:red%7Ccolor:red%7Clabel:C%7C" + mapProperties.latitude + "," + mapProperties.longitude + "&sensor=false";
-      return src;
+      return "http://maps.googleapis.com/maps/api/staticmap?z=" + mapProperties.zoom + "&size=" + helper.getSize(mapProperties.sizeW) + "x" + helper.getSize(mapProperties.sizeH) + "&t=m&markers=color:red%7Ccolor:red%7Clabel:C%7C" + mapProperties.latitude + "," + mapProperties.longitude + "&sensor=false";
   }
 }
 

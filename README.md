@@ -13,6 +13,14 @@ Feel free to create any feature, but following this steps:
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :)
 
+
+###Changelog:
+v 0.1.0:
+
+*   usign Geolocation
+*   usign Google maps API
+
+
 ###About
 **License:** MIT ® [Raphael Amorim](https://github.com/raphamorim)
 
