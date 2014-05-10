@@ -33,7 +33,7 @@ function __getElements() {
       mapProperties.list.push("map" + i);
   }
 
-  __process = window.setInterval(__startApp, 500);
+  __process = window.setInterval(__startApp, 100);
 }
 
 function __startApp() {
@@ -205,7 +205,6 @@ function setLongitude(position){
       helper.html(pointer, String(latlng));
       pointer = null;
 }
-
 
 //The Map Class
 function Map(){
