@@ -24,4 +24,4 @@ v 0.1.0:
 ###About
 **License:** MIT ® [Raphael Amorim](https://github.com/raphamorim)
 
-**Actual Version:** 0.1vr
+**Actual Version:** 0.1.0vr (unstable)
