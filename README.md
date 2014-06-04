@@ -5,7 +5,7 @@ The MapJs is a JavaScript project to create maps or use Geolocation API using on
 
 ###How can I contribute to project?
 
-Feel free to create any feature, but following this steps:
+Don't be shy, feel free to create any feature, but following this steps:
 
 1. Fork this project
 2. Create your feature branch: `git checkout -b my-new-feature`
