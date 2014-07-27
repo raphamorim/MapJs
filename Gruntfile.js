@@ -1,9 +1,5 @@
 module.exports = function(grunt) {
     grunt.initConfig({
-        // jshint: {
-        //     src: "src/**/*.js",
-        //     gruntfile: "Gruntfile.js"
-        // },
         concat: {
             options: {
                 banner: "/*MapJs was developed by Raphael Amorim \n\n GitHub Project -> http://github.com/raphamorim/mapjs*/ \n\n"
@@ -19,8 +15,7 @@ module.exports = function(grunt) {
         },
     });
 
-    [   "grunt-contrib-jshint",
-        "grunt-contrib-concat",
+    [   "grunt-contrib-concat",
         "grunt-contrib-uglify"
     ].forEach(grunt.loadNpmTasks);
 
