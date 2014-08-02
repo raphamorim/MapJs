@@ -1,9 +1,6 @@
 module.exports = function(grunt) {
     grunt.initConfig({
         concat: {
-            options: {
-                banner: "/*MapJs was developed by Raphael Amorim \n\n GitHub Project -> http://github.com/raphamorim/mapjs*/ \n\n"
-            },
             core: {
                 src: "src/**/*.js",
                 dest: "build/mapjs.js"
