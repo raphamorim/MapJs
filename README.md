@@ -15,6 +15,9 @@ Don't be shy, feel free to create any feature, but following this steps:
 
 
 ###Changelog:
+v 0.1.3:
+*   major rewrite, working more fast.
+
 v 0.1.0:
 
 *   usign Geolocation
@@ -24,4 +27,4 @@ v 0.1.0:
 ###About
 **License:** MIT ® [Raphael Amorim](https://github.com/raphamorim)
 
-**Actual Version:** 0.1.0
+**Actual Version:** 0.1.3
