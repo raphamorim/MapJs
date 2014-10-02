@@ -1,15 +1,27 @@
-/*MapJs was developed by Raphael Amorim 
+/*
+ * Helper = Utils functions
+ */
+function Helper() {
 
- GitHub Project -> http://github.com/raphamorim/mapjs*/ 
+    this.getAtt = function(selector, value) {
+      return document.querySelector(selector).getAttribute(value);
+    }
+
+    this.html = function(element, value) {
+      document.querySelector(element).innerHTML = value;
+    }
+
+    this.getSize = function(value) {
+      return value.replace("px", "");
+    }
+}
 
 var map = new Map(),
     helper = new Helper(),
     view = new View(),
     pointer = null,
-    __process = null;
-
-//Default object, you can change if wanna...
-var mapProperties = {
+    __process = null,
+    mapProperties = {
           tag: "mapjs",
       list: [],
       sizeW: "500px",
@@ -23,7 +35,7 @@ var mapProperties = {
 window.onload = __getElements();
 
 function __getElements() {
-  var indice = helper.getQuantum(mapProperties.tag);
+  var indice = document.getElementsByTagName(mapProperties.tag).length;
   var elemento = document.querySelectorAll(mapProperties.tag);
 
   for(i = 0; i < indice; i++) {
@@ -93,26 +105,6 @@ window.google = window.google || {};
     getScript("http://maps.gstatic.com/intl/pt_br/mapfiles/api-3/14/3/main.js");
 })();
 
-
-function Helper() {
-
-    this.getAtt = function(selector, value) {
-      return document.querySelector(selector).getAttribute(value);
-    }
-
-    this.getQuantum = function(element) {
-      return document.getElementsByTagName(element).length;
-    }
-
-    this.html = function(element, value) {
-      document.querySelector(element).innerHTML = value;
-    }
-
-    this.getSize = function(value) {
-      return value.replace("px", "");
-    }
-}
-
 function View() {
 
   this.returnError = function(msg) {
@@ -131,7 +123,6 @@ function View() {
   }
 }
 
-//Draw Maps Function
 function draw(position){
     var s = document.querySelector('#' + pointer);
 
@@ -190,7 +181,6 @@ function draw(position){
 
 }
 
-//Set Latitude and Longitude in a Element
 function setLatitude(position){
       var latlng = position.coords.latitude;
       helper.html(pointer, String(latlng));
@@ -203,7 +193,6 @@ function setLongitude(position){
       pointer = null;
 }
 
-//The Map Class
 function Map(){
 
       this.getMap = function(element, lat, lon, mapWidth, mapHeight, zoom) {
