@@ -2,7 +2,10 @@ module.exports = function(grunt) {
     grunt.initConfig({
         concat: {
             core: {
-                src: "src/**/*.js",
+                src: [
+                    "src/helper.js",
+                    "src/app.js"
+                ],
                 dest: "build/mapjs.js"
             }
         },
